@@ -36,4 +36,18 @@ public class ProductController {
         return "ProductList";
     }
 
+    @GetMapping("/edit/{productName}")
+    public String editProductPage(@PathVariable String productName, Model model) {
+        Product product =service.find(productName);
+        model.addAttribute("product", product);
+        return  "EditProduct";
+    }
+
+    @PostMapping("/edit/{productName}")
+    public String editProductPost(@PathVariable String productName, @ModelAttribute Product product, Model model) {
+        service.edit(productName, product);
+        return  "redirect:list";
+    }
+
+
 }
