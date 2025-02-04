@@ -33,6 +33,12 @@ public class ProductRepository {
         return product;
     }
 
+    public Product deleteProduct(String name){
+        Product product = findProduct(name);
+        productData.remove(product);
+        return product;
+    }
+
     public Iterator <Product> findAll() {
         return productData.iterator();
     }
