@@ -30,7 +30,7 @@ public class ProductRepository {
         product.setProductName(newProduct.getProductName());
         product.setProductId(newProduct.getProductId());
         product.setProductQuantity(newProduct.getProductQuantity());
-        return null;
+        return product;
     }
 
     public Iterator <Product> findAll() {
