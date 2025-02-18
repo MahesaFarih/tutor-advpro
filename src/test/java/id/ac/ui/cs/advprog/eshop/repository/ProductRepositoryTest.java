@@ -42,6 +42,7 @@ class ProductRepositoryTest {
         assertFalse(productIterator.hasNext());
     }
 
+
     @Test
     void testFindAllIfMoreThanOneProduct(){
         Product product1 = new Product();
@@ -69,6 +70,14 @@ class ProductRepositoryTest {
         assertEquals(product2.getProductId(), savedProduct.getProductId());
 
         assertFalse(productIterator.hasNext());
+    }
+
+    @Test
+    void testFindProductNotFound() {
+        ProductRepository productRepository = new ProductRepository(); // Ensure it's initialized properly
+
+        Product result = productRepository.findProduct("NonExistentProduct");
+        assertNull(result); // Assert that the result is null
     }
     @Test
     void testEditProduct() {
