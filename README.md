@@ -59,3 +59,10 @@ Jika functional test berinteraksi dengan UI web, kita bisa menerapkan Page Objec
 
 Dengan menerapkan strategi-strategi tersebut, kita dapat memastikan bahwa functional test tetap bersih, mudah dipelihara, dan tidak mengandung duplikasi yang berlebihan.
 
+Refleksi #3
+
+Dalam latihan ini, saya mengonfigurasi Gradle dengan plugin JaCoCo untuk mengukur code coverage, serta menerapkan CI/CD menggunakan GitHub Actions. Saya berhasil mengotomatisasi pengujian, analisis kode, dan deployment dengan membuat workflow yang mencakup langkah-langkah utama seperti checkout kode, setup Java, menjalankan tes, serta menambahkan alat analisis tambahan seperti OSSF Scorecard dan PMD/SonarCloud.
+
+Tantangan utama adalah memastikan cakupan kode meningkat dengan menambah unit test dan memperbaiki masalah kualitas kode yang terdeteksi. Setelah perbaikan, saya memverifikasi bahwa workflow berjalan dengan benar dan masalah tidak muncul kembali. Akhirnya, saya menerapkan mekanisme auto-deploy ke PaaS, memastikan aplikasi dapat langsung digunakan setelah perubahan diterapkan.
+
+Secara keseluruhan, latihan ini memperkuat pemahaman saya tentang CI/CD, otomatisasi pengujian, serta penerapan best practices dalam pengembangan perangkat lunak.
