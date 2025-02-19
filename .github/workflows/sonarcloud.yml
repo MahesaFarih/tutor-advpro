@@ -1,11 +1,9 @@
 name: SonarCloud analysis
 
 on:
-  push:
-    branches: [ "main" ]  # Change these to match your repo branches
-  pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
+  push:  # Runs SonarCloud on every push to any branch
+  pull_request:  # Runs SonarCloud on every PR
+  workflow_dispatch:  # Allows manual trigger
 
 permissions:
   pull-requests: read  # Allows SonarCloud to decorate PRs with analysis results
@@ -24,13 +22,15 @@ jobs:
           distribution: "temurin"
           java-version: "21"
 
-      - name: Add gradlew permission
+      - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - name: Analyze with SonarCloud
-        uses: SonarSource/sonarcloud-github-action@v2.2.0
+
+      - name: Run SonarCloud analysis
+        run: |
+          ./gradlew sonarqube \
+            -Dsonar.organization=D.Generate \
+            -Dsonar.projectKey=MahesaFarih_tutor-advpro \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Ensure this is set in GitHub Secrets
-        with:
-          args: >
-            -Dsonar.projectKey=your_project_key
-            -Dsonar.organization=your_organization
