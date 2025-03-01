@@ -66,3 +66,82 @@ Dalam latihan ini, saya mengonfigurasi Gradle dengan plugin JaCoCo untuk menguku
 Tantangan utama adalah memastikan cakupan kode meningkat dengan menambah unit test dan memperbaiki masalah kualitas kode yang terdeteksi. Setelah perbaikan, saya memverifikasi bahwa workflow berjalan dengan benar dan masalah tidak muncul kembali. Akhirnya, saya menerapkan mekanisme auto-deploy ke PaaS, memastikan aplikasi dapat langsung digunakan setelah perubahan diterapkan.
 
 Secara keseluruhan, latihan ini memperkuat pemahaman saya tentang CI/CD, otomatisasi pengujian, serta penerapan best practices dalam pengembangan perangkat lunak.
+
+Refleksi #4: Penerapan Prinsip SOLID
+
+1. Prinsip SOLID yang Diterapkan
+   Selama refactoring kode, beberapa prinsip SOLID diterapkan untuk meningkatkan kualitas dan maintainability aplikasi:
+
+Single Responsibility Principle (SRP):
+
+Contoh:
+
+CarController dan ProductController dipisahkan menjadi kelas independen.
+
+CarRepositoryImpl hanya bertanggung jawab untuk menyimpan data mobil, tanpa logika bisnis.
+
+Open/Closed Principle (OCP):
+
+Contoh:
+
+Interface CarService dan CarRepository memungkinkan ekstensi (misalnya, menambahkan metode baru) tanpa memodifikasi kode yang sudah ada.
+
+Liskov Substitution Principle (LSP):
+
+Contoh:
+
+CarController tidak lagi mewarisi ProductController, sehingga memastikan substitusi kelas tidak melanggar fungsionalitas.
+
+Interface Segregation Principle (ISP):
+
+Contoh:
+
+Interface CarService hanya berisi metode yang relevan untuk operasi mobil (tidak ada metode redundan).
+
+Dependency Inversion Principle (DIP):
+
+Contoh:
+
+CarController bergantung pada interface CarService, bukan implementasi konkret CarServiceImpl.
+
+Dependency Injection menggunakan @Autowired untuk memenuhi prinsip ini.
+
+2. Keuntungan Menerapkan SOLID
+   Penerapan SOLID memberikan manfaat signifikan:
+
+Mudah Diperluas
+Contoh: Menambahkan fitur baru seperti MotorcycleService dapat dilakukan dengan mengimplementasikan interface VehicleService tanpa mengubah kode yang ada (OCP).
+
+Kode Lebih Terstruktur
+Contoh: Pemisahan CarController dan ProductController menghindari duplikasi logika (SRP).
+
+Fleksibilitas
+Contoh: Mengganti database dari in-memory list ke PostgreSQL hanya memerlukan perubahan di CarRepositoryImpl, tanpa mengganggu service atau controller (DIP).
+
+Meminimalisir Bug
+Contoh: Penghapusan inheritance antara CarController dan ProductController mencegah efek samping yang tidak diinginkan (LSP).
+
+3. Kerugian Tidak Menerapkan SOLID
+   Jika SOLID diabaikan, kode akan rentan terhadap masalah berikut:
+
+Kode Kaku dan Sulit Diubah
+Contoh: Sebelum refactoring, CarController yang mewarisi ProductController menyebabkan ketergantungan yang tidak perlu. Perubahan di ProductController bisa merusak fungsionalitas mobil.
+
+Duplikasi Logika
+Contoh: Tanpa SRP, kelas CarRepository mungkin menangani validasi data dan penyimpanan sekaligus, sehingga logika tersebar di banyak tempat.
+
+Testing yang Rumit
+Contoh: Jika CarServiceImpl bergantung langsung pada CarRepositoryImpl (bukan interface), unit test akan sulit dibuat karena ketergantungan konkret.
+
+Kesulitan Kolaborasi
+Contoh: Tanpa ISP, interface Service yang besar akan memaksa kelas mengimplementasikan metode tidak relevan, memperlambat pengembangan tim.
+
+Formatting Fixes
+Penambahan header ### untuk subbagian.
+
+Spasi konsisten antar-paragraf.
+
+Penomoran refleksi yang jelas (Refleksi #1 hingga Refleksi #4).
+
+Kesimpulan
+Penerapan SOLID meningkatkan kualitas kode secara holistik, sementara mengabaikannya dapat menyebabkan technical debt yang signifikan. Refleksi ini memperkuat pentingnya prinsip SOLID dalam pengembangan berkelanjutan.
