@@ -79,4 +79,5 @@ public class OrderTest {
                 this.products, 1708560000L, "Safira Sudrajat");
         assertThrows(IllegalArgumentException.class, () -> order.setStatus("MEOW"));
     }
+
 }
